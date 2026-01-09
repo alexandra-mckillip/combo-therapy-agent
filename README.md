@@ -58,25 +58,39 @@ Example outputs are provided in the `data/` directory for the seed drug Paclitax
 | `partner_frequencies.json` | Aggregated partner drug frequency counts |
 | `top_partner_drugs.png` | Histogram of most frequent combination partners |
 
-## Setup and Usage
 
-### Environment Requirements
+## Usage
+### 1. Environment Requirements
 
-- Python **3.9+**
-- External libraries:
-  - `requests`
-  - `matplotlib`
-- Standard libraries:
-  - `json`
-  - `collections`
-  - `subprocess`
-  - `os`
-  - `sys`
-  - `re`
+This project is developed using **Python 3.9+**.
 
-### Running the Pipeline
+Required Libraries:
+- External libraries: `requests`, `matplotlib`, `google-genai`
+- Standard libraries: `json`, `collections`, `subprocess`, `os`, `sys`, `re`
 
-From the project root directory:
+### 2. Gemini API Configuration
+
+The agent utilizes the **Gemini 2.0 Flash** model for intelligent drug extraction. To use the live AI features, you must provide a valid API key from Google AI Studio.
+
+Steps to Configure:
+
+1. Obtain an API Key:
+   Generate a free key at https://ai.google/studio
+
+2. Set Environment Variable:
+   For security, the script retrieves your key from the system environment. Run the following in your terminal:
+
+```bash
+export GEMINI_API_KEY="your_api_key_here"
+```
+
+### 3. Running the Pipeline
+
+From the project root directory, run:
 
 ```bash
 python scripts/run_pipeline.py <SEED_DRUG>
+```
+
+Replace <SEED_DRUG> with the name of the drug you want to use as the starting point for your analysis.
+
