@@ -40,8 +40,43 @@ To handle the limitations of AI services (specifically API rate limits), the pip
 
 | Script | Description |
 | :--- | :--- |
-| **fetch_trials.py** | Core utility for paginated requests to the ClinicalTrials.gov API v2. |
-| **extract_partners.py** | **The Agent.** Orchestrates LLM batches, handles API errors, and performs drug frequency aggregation. |
-| **run_pipeline.py** | The master controller. Executes the end-to-end flow from raw query to final PNG chart. |
+| **fetch_trials.py** | Helper function to fetch clinical trial data from ClinicalTrials.gov API for a specified drug. |
+| **run_fetch_trials.py** | Core utility for paginated requests to the ClinicalTrials.gov API v2. |
+| **extract_partners.py** | Orchestrates LLM batches, handles API errors, and performs drug frequency aggregation. |
+| **run_pipeline.py** | Executes the end-to-end flow from raw query to final PNG chart. |
 
----
+## Pipeline Outputs
+
+Example outputs are provided in the `data/` directory for the seed drug Paclitaxel.
+
+![Paclitaxel Partner Drugs Histogram](data/top_partner_drugs_histogram.png)
+
+| File | Description |
+|----|----|
+| `raw_trials.json` | Filtered clinical trials for the seed drug |
+| `partner_drugs.json` | Trial-level partner drug lists |
+| `partner_frequencies.json` | Aggregated partner drug frequency counts |
+| `top_partner_drugs.png` | Histogram of most frequent combination partners |
+
+## Setup and Usage
+
+### Environment Requirements
+
+- Python **3.9+**
+- External libraries:
+  - `requests`
+  - `matplotlib`
+- Standard libraries:
+  - `json`
+  - `collections`
+  - `subprocess`
+  - `os`
+  - `sys`
+  - `re`
+
+### Running the Pipeline
+
+From the project root directory:
+
+```bash
+python scripts/run_pipeline.py <SEED_DRUG>
